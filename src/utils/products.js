@@ -24,14 +24,187 @@ import LittleChampAttaJpeg from '../assets/Product/Little Champ Atta.jpeg';
 import LittleChampAttaGreenVariant from '../assets/Product/Little Champ Atta – Green Variant.jpeg';
 import MoringaAttaJpeg from '../assets/Product/Moringa Atta (Gluten Free Superfood Flour).jpeg';
 import OrganicMoringaSoup from '../assets/Product/organic moringa soup.png';
-import OrganicSlimTea from '../assets/Product/organic slim tea.png';
 import NewProduct1 from '../assets/Product/ChatGPT Image Apr 20, 2026, 10_53_32 AM.png';
 import NewProduct2 from '../assets/Product/ChatGPT Image Apr 20, 2026, 11_02_41 AM.png';
 import NewProduct3 from '../assets/Product/ChatGPT Image Apr 20, 2026, 11_06_49 AM.png';
 
-export const categories = ['All', 'Wellness Sprays', 'Health Teas', 'Herbal Juices', 'Nutrition & Atta', 'Care Oils'];
+export const categories = ['All', 'Herbal Juices', 'Health Teas', 'Nutrition & Atta', 'Wellness & Detox', 'Care Oils'];
+
+export const categoryProducts = {
+  'Herbal Juices': [
+    'Green juice',
+    'Pcos pcod care juice',
+    'Sea buckthon jouce man stamina booster j',
+    'PCOS PCOD Care Green Juice',
+    'Sea Buckthorn Juice',
+    'Glow Veda Ayurvedic Elixir',
+    'Glowing Skin Effervescence',
+    'Organic Kidney Detox Bottles'
+  ],
+  'Health Teas': [
+    'Pcos pcod care tea',
+    'Bremi memory booster t',
+    'Dibo care tea',
+    'Morning permenent tea',
+    'Natural Immunity Booster',
+    'Organic Diabetic Tea',
+    'Brahmi Memory Tea',
+    'Organic Kidney Detox Pouch',
+    'Organic Liver Detox Tea',
+    'Organic PCOS Care Tea',
+    'Organic Detox Tea Box',
+    'Organic Kidney Detox Tea',
+    'Zenora Liver Detox Tea'
+  ],
+  'Nutrition & Atta': [
+    'Sea buckthon ABC malt',
+    'Organic Moringa Soup',
+    'Little Champ Multigrain Atta',
+    'Moringa Atta Gluten-Free Flour',
+    'Diagocare Atta Packaging',
+    'Diagocare Atta',
+    'Little Champ Atta',
+    'Little Champ Atta (Green Variant)',
+    'Moringa Atta (Gluten Free Superfood Flour)'
+  ],
+  'Wellness & Detox': [
+    'Colestro veda',
+    'Liver detox',
+    'Kidney detox',
+    'Herbal Wellness Pack',
+    'Post Pregnancy Care Spray',
+    'Kidney Care Spray',
+    'Slip Disk Pain Relief Spray'
+  ],
+  'Care Oils': [
+    'Pure Ayurvedic Extract',
+    'Spine Spray Oil',
+    'Migraine Relief Oil'
+  ]
+};
 
 export const allProducts = [
+  {
+    id: 201,
+    name: "Green juice",
+    price: 450,
+    originalPrice: 550,
+    rating: 4.8,
+    reviews: 120,
+    image: PCOSGreenJuice,
+    category: 'Herbal Juices',
+    description: "Fresh and healthy organic green juice for daily wellness."
+  },
+  {
+    id: 202,
+    name: "Colestro veda",
+    price: 599,
+    originalPrice: 799,
+    rating: 4.9,
+    reviews: 85,
+    image: GlowVeda,
+    category: 'Wellness & Detox',
+    description: "Ayurvedic formula for cholesterol management and heart health."
+  },
+  {
+    id: 203,
+    name: "Pcos pcod care juice",
+    price: 480,
+    originalPrice: 580,
+    rating: 4.7,
+    reviews: 210,
+    image: PCOSGreenJuice,
+    category: 'Herbal Juices',
+    description: "Specialized juice to support hormonal balance and manage PCOS/PCOD symptoms."
+  },
+  {
+    id: 204,
+    name: "Sea buckthon jouce man stamina booster j",
+    price: 699,
+    originalPrice: 899,
+    rating: 4.9,
+    reviews: 145,
+    image: SeaBuckthornJuice,
+    category: 'Herbal Juices',
+    description: "Powerful Sea Buckthorn juice formulated for men's stamina and vitality."
+  },
+  {
+    id: 205,
+    name: "Sea buckthon ABC malt",
+    price: 750,
+    originalPrice: 950,
+    rating: 5.0,
+    reviews: 65,
+    image: NewProduct3,
+    category: 'Nutrition & Atta',
+    description: "Nutritious ABC (Apple, Beetroot, Carrot) malt with Sea Buckthorn for overall health."
+  },
+  {
+    id: 206,
+    name: "Liver detox",
+    price: 480,
+    originalPrice: 580,
+    rating: 4.8,
+    reviews: 95,
+    image: ZenoraLiverDetoxTea,
+    category: 'Wellness & Detox',
+    description: "Natural formula to support liver detoxification and healthy function."
+  },
+  {
+    id: 207,
+    name: "Kidney detox",
+    price: 450,
+    originalPrice: 550,
+    rating: 4.7,
+    reviews: 112,
+    image: KidneyDetoxBottles,
+    category: 'Wellness & Detox',
+    description: "Herbal blend for kidney cleansing and renal health support."
+  },
+  {
+    id: 208,
+    name: "Pcos pcod care tea",
+    price: 499,
+    originalPrice: 599,
+    rating: 4.9,
+    reviews: 180,
+    image: PCOSCareTea,
+    category: 'Health Teas',
+    description: "Soothing herbal tea for hormonal balance and PCOS support."
+  },
+  {
+    id: 209,
+    name: "Bremi memory booster t",
+    price: 420,
+    originalPrice: 520,
+    rating: 4.8,
+    reviews: 75,
+    image: BrahmiTea,
+    category: 'Health Teas',
+    description: "Brahmi-based tea to enhance memory, focus, and cognitive health."
+  },
+  {
+    id: 210,
+    name: "Dibo care tea",
+    price: 399,
+    originalPrice: 499,
+    rating: 4.7,
+    reviews: 140,
+    image: DiabeticTea,
+    category: 'Health Teas',
+    description: "Natural tea blend to support healthy blood sugar levels."
+  },
+  {
+    id: 212,
+    name: "Morning permenent tea",
+    price: 299,
+    originalPrice: 399,
+    rating: 4.5,
+    reviews: 50,
+    image: DetoxTeaBox,
+    category: 'Health Teas',
+    description: "Refreshing morning tea for a healthy start to your day."
+  },
   {
     id: 103,
     name: "Herbal Wellness Pack",
@@ -40,7 +213,7 @@ export const allProducts = [
     rating: 4.9,
     reviews: 56,
     image: NewProduct1,
-    category: 'Wellness Sprays',
+    category: 'Wellness & Detox',
     description: "A comprehensive herbal wellness pack for overall body health and vitality. Contains natural extracts to boost energy levels."
   },
   {
@@ -66,7 +239,7 @@ export const allProducts = [
     description: "Highly concentrated pure Ayurvedic extract for targeted healing and rejuvenation. Crafted using ancient traditional methods."
   },
   {
-    id: 101,
+    id: 106,
     name: "Organic Moringa Soup",
     price: 299,
     originalPrice: 350,
@@ -75,17 +248,6 @@ export const allProducts = [
     image: OrganicMoringaSoup,
     category: 'Nutrition & Atta',
     description: "Nutrient-rich organic moringa soup for a healthy and quick meal. Boosts immunity and provides essential vitamins."
-  },
-  {
-    id: 102,
-    name: "Organic Slim Tea",
-    price: 349,
-    originalPrice: 400,
-    rating: 4.6,
-    reviews: 110,
-    image: OrganicSlimTea,
-    category: 'Health Teas',
-    description: "Natural organic slim tea to support weight management and detoxification. A refreshing blend for a healthier lifestyle."
   },
   {
     id: 1,
@@ -106,7 +268,7 @@ export const allProducts = [
     rating: 4.8,
     reviews: 156,
     image: PostPregnancySpray,
-    category: 'Wellness Sprays',
+    category: 'Wellness & Detox',
     description: "Specially formulated for post-pregnancy recovery. Helps in skin firming and provides comfort during the postpartum healing process."
   },
   {
@@ -117,7 +279,7 @@ export const allProducts = [
     rating: 4.6,
     reviews: 92,
     image: KidneySpray,
-    category: 'Wellness Sprays',
+    category: 'Wellness & Detox',
     description: "Supportive care for kidney health. A unique spray formulation designed to complement renal wellness routines."
   },
   {
@@ -282,7 +444,7 @@ export const allProducts = [
     rating: 4.9,
     reviews: 156,
     image: SlipDiskSpray,
-    category: 'Wellness Sprays',
+    category: 'Wellness & Detox',
     description: "Fast-acting pain relief spray for slip disk and lower back discomfort. Enhances mobility and comfort."
   },
   {

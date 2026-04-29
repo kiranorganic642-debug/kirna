@@ -30,13 +30,15 @@ const Shop = () => {
     const search = params.get('search');
     const category = params.get('category');
     
-    if (search) {
-      setSearchQuery(search);
-    }
+    // Reset states if params are missing to avoid persistent filters
+    setSearchQuery(search || '');
+    
     if (category && categories.includes(category)) {
       setSelectedCategory(category);
+    } else {
+      setSelectedCategory('All');
     }
-  }, [location.search]);
+  }, [location.search, categories]);
 
   const filteredProducts = useMemo(() => {
     return products

@@ -14,12 +14,12 @@ import SeaBuckthornJuice from '../assets/Product/Organic Sea Buckthorn Juice.png
 import PostPregnancySpray from '../assets/Product/Organic Post Pregnancy Spray.png';
 
 const categories = [
-  { id: 1, name: 'Wellness Sprays', icon: '💨', count: '10+ Products', color: 'bg-blue-50 text-blue-600' },
-  { id: 2, name: 'Health Teas', icon: '☕', count: '5+ Products', color: 'bg-green-50 text-green-600' },
-  { id: 3, name: 'Herbal Juices', icon: '🥤', count: '8+ Products', color: 'bg-teal-50 text-teal-600' },
-  { id: 4, name: 'Nutrition & Atta', icon: '🌾', count: '3+ Products', color: 'bg-orange-50 text-orange-600' },
+  { id: 1, name: 'Herbal Juices', icon: '🥤', count: '10+ Products', color: 'bg-teal-50 text-teal-600' },
+  { id: 2, name: 'Health Teas', icon: '☕', count: '15+ Products', color: 'bg-green-50 text-green-600' },
+  { id: 3, name: 'Nutrition & Atta', icon: '🌾', count: '10+ Products', color: 'bg-orange-50 text-orange-600' },
+  { id: 4, name: 'Wellness & Detox', icon: '💨', count: '10+ Products', color: 'bg-blue-50 text-blue-600' },
   { id: 5, name: 'Care Oils', icon: '🛢️', count: '5+ Products', color: 'bg-amber-50 text-amber-600' },
-  { id: 6, name: 'Ayurvedic Syrups', icon: '🧪', count: '10+ Products', color: 'bg-red-50 text-red-600' },
+  { id: 6, name: 'All', icon: '✨', count: '50+ Products', color: 'bg-red-50 text-red-600' },
 ];
 
 const testimonials = [
@@ -243,7 +243,7 @@ const Home = () => {
             {categories.map((cat) => (
               <Link 
                 key={cat.id} 
-                to={`/shop?category=${cat.name}`}
+                to={`/shop?category=${encodeURIComponent(cat.name)}`}
                 className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 group text-center"
               >
                 <div className={`w-16 h-16 ${cat.color} rounded-full flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform`}>

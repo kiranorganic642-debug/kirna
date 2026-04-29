@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Search, Menu, X, User, Heart, LogOut, Settings, Shield } from 'lucide-react';
+import { ShoppingCart, Search, Menu, X, User, Heart, LogOut, Settings, Shield, ChevronDown, ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistProvider';
 import { useAuth } from '../context/AuthProvider';
+import { categories, categoryProducts } from '../utils/products';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { cartCount } = useCart();
   const { wishlist } = useWishlist();
@@ -45,7 +47,60 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium transition-colors">Home</Link>
-            <Link to="/shop" className="text-gray-600 hover:text-primary-600 font-medium transition-colors">Shop</Link>
+            
+            {/* Products Mega Menu */}
+            <div className="relative group py-2">
+              <Link to="/shop" className="text-gray-600 hover:text-primary-600 font-medium transition-colors flex items-center gap-1">
+                Products <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />
+              </Link>
+              
+              <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-[800px] bg-white border border-gray-100 rounded-[2rem] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 p-8 overflow-hidden">
+                <div className="grid grid-cols-3 gap-10 relative z-10">
+                  {Object.entries(categoryProducts).map(([category, products]) => (
+                    <div key={category} className="space-y-4">
+                      <Link 
+                        to={`/shop?category=${encodeURIComponent(category)}`}
+                        className="flex items-center gap-2 mb-2 group/cat"
+                      >
+                        <div className="w-1.5 h-6 bg-primary-600 rounded-full group-hover/cat:scale-y-125 transition-transform"></div>
+                        <h3 className="text-gray-900 font-black text-sm uppercase tracking-wider group-hover/cat:text-primary-600 transition-colors">
+                          {category}
+                        </h3>
+                      </Link>
+                      <ul className="space-y-2 ml-3">
+                        {products.map((product) => (
+                          <li key={product}>
+                            <Link 
+                              to={`/shop?search=${encodeURIComponent(product)}`}
+                              className="text-gray-500 hover:text-primary-600 text-sm font-medium transition-all hover:translate-x-1 block"
+                            >
+                              {product}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Footer of Mega Menu */}
+                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between relative z-10">
+                  <p className="text-sm text-gray-400 font-medium">Discover our full range of organic wellness products.</p>
+                  <Link 
+                    to="/shop" 
+                    onClick={() => {}}
+                    className="flex items-center gap-2 px-6 py-2 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 text-sm"
+                  >
+                    View All Products
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                {/* Decorative Background Element */}
+                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-50 -z-0"></div>
+              </div>
+            </div>
+
             <div className="relative group">
               <Link to="/appointment" className="text-gray-600 hover:text-primary-600 font-medium transition-colors flex items-center gap-1">
                 Appointment
@@ -129,7 +184,46 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t border-gray-100 py-4 px-4 animate-in slide-in-from-top duration-300">
           <div className="flex flex-col space-y-4">
             <Link to="/" onClick={toggleMenu} className="text-gray-600 hover:text-primary-600 font-medium py-2">Home</Link>
-            <Link to="/shop" onClick={toggleMenu} className="text-gray-600 hover:text-primary-600 font-medium py-2">Shop</Link>
+            
+            {/* Mobile Products Dropdown */}
+            <div className="flex flex-col">
+              <button 
+                onClick={() => setIsMobileProductsOpen(!isMobileProductsOpen)}
+                className="flex items-center justify-between text-gray-600 hover:text-primary-600 font-medium py-2 w-full text-left"
+              >
+                Products
+                <ChevronDown className={`w-5 h-5 transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              <div className={`overflow-hidden transition-all duration-300 ${isMobileProductsOpen ? 'max-h-[1000px] mt-2' : 'max-h-0'}`}>
+                <div className="pl-4 space-y-6 border-l-2 border-primary-50">
+                  {Object.entries(categoryProducts).map(([category, products]) => (
+                    <div key={category} className="space-y-3">
+                      <Link 
+                        to={`/shop?category=${encodeURIComponent(category)}`}
+                        onClick={toggleMenu}
+                        className="text-[10px] font-black text-gray-400 uppercase tracking-widest hover:text-primary-600 transition-colors block"
+                      >
+                        {category}
+                      </Link>
+                      <div className="flex flex-col space-y-2">
+                        {products.map((product) => (
+                          <Link 
+                            key={product}
+                            to={`/shop?search=${encodeURIComponent(product)}`}
+                            onClick={toggleMenu}
+                            className="text-sm text-gray-500 hover:text-primary-600 font-medium"
+                          >
+                            {product}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <Link to="/appointment" onClick={toggleMenu} className="text-gray-600 hover:text-primary-600 font-medium py-2">Book Appointment</Link>
             <Link to="/my-appointments" onClick={toggleMenu} className="text-gray-600 hover:text-primary-600 font-medium py-2">My Appointments</Link>
             <Link to="/about" onClick={toggleMenu} className="text-gray-600 hover:text-primary-600 font-medium py-2">About Us</Link>
