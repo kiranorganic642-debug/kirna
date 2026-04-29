@@ -27,6 +27,8 @@ import OrganicMoringaSoup from '../assets/Product/organic moringa soup.png';
 import NewProduct1 from '../assets/Product/ChatGPT Image Apr 20, 2026, 10_53_32 AM.png';
 import NewProduct2 from '../assets/Product/ChatGPT Image Apr 20, 2026, 11_02_41 AM.png';
 import NewProduct3 from '../assets/Product/ChatGPT Image Apr 20, 2026, 11_06_49 AM.png';
+import MenStaminaBooster from "../assets/Product/men's stamina booster juice.png";
+import SeaBuckthornMalt from "../assets/Product/Organic Seabuckthorn malt powder.png";
 
 export const categories = ['All', 'Herbal Juices', 'Health Teas', 'Nutrition & Atta', 'Wellness & Detox', 'Care Oils'];
 
@@ -39,7 +41,8 @@ export const categoryProducts = {
     'Sea Buckthorn Juice',
     'Glow Veda Ayurvedic Elixir',
     'Glowing Skin Effervescence',
-    'Organic Kidney Detox Bottles'
+    'Organic Kidney Detox Bottles',
+    'Men\'s Stamina Booster Juice'
   ],
   'Health Teas': [
     'Pcos pcod care tea',
@@ -65,7 +68,8 @@ export const categoryProducts = {
     'Diagocare Atta',
     'Little Champ Atta',
     'Little Champ Atta (Green Variant)',
-    'Moringa Atta (Gluten Free Superfood Flour)'
+    'Moringa Atta (Gluten Free Superfood Flour)',
+    'Organic Seabuckthorn Malt Powder'
   ],
   'Wellness & Detox': [
     'Colestro veda',
@@ -523,5 +527,27 @@ export const allProducts = [
     image: MoringaAttaJpeg,
     category: 'Nutrition & Atta',
     description: "Healthy and gluten-free superfood flour enriched with the goodness of Moringa. Great for health-conscious families."
+  },
+  {
+    id: 301,
+    name: "Men's Stamina Booster Juice",
+    price: 699,
+    originalPrice: 899,
+    rating: 4.9,
+    reviews: 145,
+    image: MenStaminaBooster,
+    category: 'Herbal Juices',
+    description: "Powerful Sea Buckthorn juice formulated for men's stamina and vitality. Rich in antioxidants and essential nutrients."
+  },
+  {
+    id: 302,
+    name: "Organic Seabuckthorn Malt Powder",
+    price: 750,
+    originalPrice: 950,
+    rating: 5.0,
+    reviews: 65,
+    image: SeaBuckthornMalt,
+    category: 'Nutrition & Atta',
+    description: "Nutritious Seabuckthorn malt powder for overall health and energy. A perfect addition to your daily health routine."
   }
 ];
