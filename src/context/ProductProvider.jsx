@@ -13,39 +13,44 @@ export const useProducts = () => {
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
-    // If initialProducts is empty, we want to clear everything to fulfill user request
-    if (initialProducts.length === 0) {
-      localStorage.removeItem('products');
-      return [];
-    }
-    
+    // Force reset if count is not 32 to ensure only assets products are shown
     const saved = localStorage.getItem('products');
     if (saved) {
       try {
         const parsedProducts = JSON.parse(saved);
         
-        // Refresh image URLs from initialProducts for products that exist in both
-        // This prevents broken images when build hashes change
-        const refreshedProducts = parsedProducts.map(savedProduct => {
+        // If the number of products in storage is different from initial, or if we want to ensure sync
+        // we filter to keep ONLY products that exist in initialProducts
+        const validProducts = parsedProducts.filter(savedProduct => 
+          initialProducts.some(p => p.id === savedProduct.id)
+        );
+
+        // Refresh image URLs and data from initialProducts
+        const refreshedProducts = validProducts.map(savedProduct => {
           const freshProduct = initialProducts.find(p => p.id === savedProduct.id);
-          if (freshProduct) {
-            return {
-              ...savedProduct,
-              image: freshProduct.image, // Always use the fresh image URL from the current build
-              name: freshProduct.name,   // Also refresh name and category in case they changed
-              category: freshProduct.category
-            };
-          }
-          return savedProduct;
+          return {
+            ...savedProduct,
+            image: freshProduct.image,
+            name: freshProduct.name,
+            category: freshProduct.category,
+            price: freshProduct.price,
+            originalPrice: freshProduct.originalPrice
+          };
         });
 
-        // Merge newly added products from initialProducts that aren't in localStorage yet
+        // Ensure we have exactly all initial products
         const existingIds = new Set(refreshedProducts.map(p => p.id));
-        const newProductsToAdd = initialProducts.filter(p => !existingIds.has(p.id));
+        const missingProducts = initialProducts.filter(p => !existingIds.has(p.id));
         
-        return [...newProductsToAdd, ...refreshedProducts];
+        const finalProducts = [...missingProducts, ...refreshedProducts];
+        
+        // If after sync the count is still wrong (too many), just return initial
+        if (finalProducts.length !== initialProducts.length) {
+          return initialProducts;
+        }
+        
+        return finalProducts;
       } catch (e) {
-        console.error("Error loading products from localStorage:", e);
         return initialProducts;
       }
     }
