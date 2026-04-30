@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Search, Menu, X, User, Heart, ChevronDown, LogOut } from 'lucide-react';
+import { ShoppingCart, Search, Menu, X, User, Heart, ChevronDown, LogOut, Leaf } from 'lucide-react';
 import Logo from './Logo';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistProvider';
@@ -32,6 +32,26 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+  const productLinks = [
+    { name: "Green juice", link: "/shop?search=Green%20juice" },
+    { name: "Colestro veda", link: "/shop?search=Colestro%20veda" },
+    { name: "Pcos pcod care juice", link: "/shop?search=Pcos%20pcod%20care%20juice" },
+    { name: "Sea buckthon stamina", link: "/shop?search=Sea%20buckthon%20jouce" },
+    { name: "Sea buckthon ABC malt", link: "/shop?search=Sea%20buckthon%20ABC" },
+    { name: "Liver detox", link: "/shop?search=Liver%20detox" },
+    { name: "Kidney detox", link: "/shop?search=Kidney%20detox" },
+    { name: "Pcos pcod care tea", link: "/shop?search=Pcos%20pcod%20care%20tea" },
+    { name: "Bremi memory booster", link: "/shop?search=Bremi" },
+    { name: "Dibo care tea", link: "/shop?search=Dibo%20care%20tea" },
+    { name: "Slim tea", link: "/shop?search=Slim%20tea" },
+    { name: "Morning permenent tea", link: "/shop?search=Morning" },
+    { name: "Moringa soup", link: "/shop?search=Moringa%20soup" },
+    { name: "Dibo care atta", link: "/shop?search=Dibo%20care%20atta" },
+    { name: "Moringa flour", link: "/shop?search=Moringa%20flour" },
+    { name: "Little cheam flour", link: "/shop?search=Little%20cheam" },
+    { name: "Care Oil", link: "/shop?search=oil" }
+  ];
+
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 py-5 font-sans">
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -45,14 +65,27 @@ const Navbar = () => {
           <Link to="/" className="text-[#4a5568] hover:text-[#2d6a4f] font-semibold text-[15px] transition-all">Home</Link>
           
           <div className="relative group">
-            <Link to="/shop" className="text-[#4a5568] hover:text-[#2d6a4f] font-semibold text-[15px] transition-all flex items-center gap-1">
+            <button className="text-[#4a5568] hover:text-[#2d6a4f] font-semibold text-[15px] transition-all flex items-center gap-1 py-2">
               Products <ChevronDown className="w-4 h-4 text-gray-400 group-hover:rotate-180 transition-transform" />
-            </Link>
-            {/* Dropdown Menu */}
-            <div className="absolute top-full left-0 w-56 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 p-4 border border-gray-50 mt-2">
-              <Link to="/shop?search=Herbal" className="block text-[#4a5568] hover:text-[#2d6a4f] font-medium text-sm py-2 px-3 rounded-lg hover:bg-gray-50 transition-all">Herbal Products</Link>
-              <Link to="/shop?search=Immunity" className="block text-[#4a5568] hover:text-[#2d6a4f] font-medium text-sm py-2 px-3 rounded-lg hover:bg-gray-50 transition-all">Immunity Boosters</Link>
-              <Link to="/shop?search=Skin" className="block text-[#4a5568] hover:text-[#2d6a4f] font-medium text-sm py-2 px-3 rounded-lg hover:bg-gray-50 transition-all">Skin Care</Link>
+            </button>
+            
+            {/* Mega Dropdown Menu */}
+            <div className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 p-8 border border-gray-100 mt-2">
+              <div className="grid grid-cols-3 gap-x-8 gap-y-4">
+                {productLinks.map((item, index) => (
+                  <Link 
+                    key={index}
+                    to={item.link}
+                    className="flex items-center gap-2 text-[#4a5568] hover:text-[#2d6a4f] font-medium text-sm py-1.5 transition-all group/item"
+                  >
+                    <Leaf className="w-3 h-3 text-[#2d6a4f] opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-6 pt-6 border-t border-gray-50 flex justify-center">
+                <Link to="/shop" className="text-[12px] font-bold text-[#2d6a4f] uppercase tracking-widest hover:underline">View All Products</Link>
+              </div>
             </div>
           </div>
 
@@ -111,16 +144,16 @@ const Navbar = () => {
                 <ChevronDown className={`w-5 h-5 transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`} />
               </button>
               
-              <div className={`overflow-hidden transition-all duration-300 ${isMobileProductsOpen ? 'max-h-[500px] mt-4 ml-4' : 'max-h-0'}`}>
+              <div className={`overflow-hidden transition-all duration-300 ${isMobileProductsOpen ? 'max-h-[800px] mt-4 ml-4' : 'max-h-0'}`}>
                 <div className="flex flex-col space-y-3 border-l-2 border-gray-100 pl-4">
-                  {Object.keys(categoryProducts).map((category) => (
+                  {productLinks.map((item, index) => (
                     <Link 
-                      key={category}
-                      to={`/shop?category=${encodeURIComponent(category)}`}
+                      key={index}
+                      to={item.link}
                       onClick={toggleMenu}
                       className="text-gray-500 font-medium"
                     >
-                      {category}
+                      {item.name}
                     </Link>
                   ))}
                 </div>
@@ -139,7 +172,7 @@ const Navbar = () => {
                 <Heart className="w-5 h-5" /> Wishlist
               </Link>
               {user ? (
-                <button onClick={handleLogout} className="text-red-600 font-bold flex items-center gap-3">
+                <button handleLogout className="text-red-600 font-bold flex items-center gap-3">
                   <LogOut className="w-5 h-5" /> Logout
                 </button>
               ) : (

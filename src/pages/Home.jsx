@@ -200,7 +200,6 @@ const Home = () => {
                     <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                       <div className="h-full bg-primary-500" style={{ width: product.stock && product.sold ? `${((product.sold / product.stock) * 100).toFixed(0)}%` : '15%' }} />
                     </div>
-                    <p className="text-[11px] text-primary-600 font-bold italic">Delivery by Tomorrow</p>
                   </div>
                 </div>
               </div>
