@@ -33,23 +33,23 @@ const Navbar = () => {
   };
 
   const productLinks = [
-    { name: "Green juice", link: "/shop?search=Green%20juice" },
-    { name: "Colestro veda", link: "/shop?search=Colestro%20veda" },
-    { name: "Pcos pcod care juice", link: "/shop?search=Pcos%20pcod%20care%20juice" },
-    { name: "Sea buckthon stamina", link: "/shop?search=Sea%20buckthon%20jouce" },
-    { name: "Sea buckthon ABC malt", link: "/shop?search=Sea%20buckthon%20ABC" },
-    { name: "Liver detox", link: "/shop?search=Liver%20detox" },
-    { name: "Kidney detox", link: "/shop?search=Kidney%20detox" },
-    { name: "Pcos pcod care tea", link: "/shop?search=Pcos%20pcod%20care%20tea" },
-    { name: "Bremi memory booster", link: "/shop?search=Bremi" },
-    { name: "Dibo care tea", link: "/shop?search=Dibo%20care%20tea" },
-    { name: "Slim tea", link: "/shop?search=Slim%20tea" },
-    { name: "Morning permenent tea", link: "/shop?search=Morning" },
-    { name: "Moringa soup", link: "/shop?search=Moringa%20soup" },
-    { name: "Dibo care atta", link: "/shop?search=Dibo%20care%20atta" },
-    { name: "Moringa flour", link: "/shop?search=Moringa%20flour" },
-    { name: "Little cheam flour", link: "/shop?search=Little%20cheam" },
-    { name: "Care Oil", link: "/shop?search=oil" }
+    { name: "Green juice", link: "/shop?category=Green%20juice" },
+    { name: "Colestro veda", link: "/shop?category=Colestro%20veda" },
+    { name: "Pcos pcod care juice", link: "/shop?category=Pcos%20pcod%20care%20juice" },
+    { name: "Sea buckthon jouce man stamina booster j", link: "/shop?category=Sea%20buckthon%20jouce%20man%20stamina%20booster%20j" },
+    { name: "Sea buckthon ABC malt", link: "/shop?category=Sea%20buckthon%20ABC%20malt" },
+    { name: "Liver detox", link: "/shop?category=Liver%20detox" },
+    { name: "Kidney detox", link: "/shop?category=Kidney%20detox" },
+    { name: "Pcos pcod care tea", link: "/shop?category=Pcos%20pcod%20care%20tea" },
+    { name: "Bremi memory booster t", link: "/shop?category=Bremi%20memory%20booster%20t" },
+    { name: "Dibo care tea", link: "/shop?category=Dibo%20care%20tea" },
+    { name: "Slim tea", link: "/shop?category=Slim%20tea" },
+    { name: "Morning permenent tea", link: "/shop?category=Morning%20permenent%20tea" },
+    { name: "Moringa soup", link: "/shop?category=Moringa%20soup" },
+    { name: "Dibo care atta flour", link: "/shop?category=Dibo%20care%20atta%20flour" },
+    { name: "Moringa flour", link: "/shop?category=Moringa%20flour" },
+    { name: "Little cheam flour", link: "/shop?category=Little%20cheam%20flour" },
+    { name: "oil", link: "/shop?category=oil" }
   ];
 
   return (
@@ -69,22 +69,33 @@ const Navbar = () => {
               Products <ChevronDown className="w-4 h-4 text-gray-400 group-hover:rotate-180 transition-transform" />
             </button>
             
-            {/* Mega Dropdown Menu */}
-            <div className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 p-8 border border-gray-100 mt-2">
-              <div className="grid grid-cols-3 gap-x-8 gap-y-4">
-                {productLinks.map((item, index) => (
-                  <Link 
-                    key={index}
-                    to={item.link}
-                    className="flex items-center gap-2 text-[#4a5568] hover:text-[#2d6a4f] font-medium text-sm py-1.5 transition-all group/item"
-                  >
-                    <Leaf className="w-3 h-3 text-[#2d6a4f] opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                    {item.name}
-                  </Link>
-                ))}
+            {/* Mega Dropdown Menu (Single Column Scrollable List) */}
+            <div className="absolute top-full left-0 w-[350px] bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 p-0 border border-gray-100 mt-2 overflow-hidden">
+              <div className="bg-gray-50/50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Select Category</span>
+                <span className="text-[10px] font-bold text-primary-600 uppercase tracking-widest animate-pulse">Scroll ↓</span>
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-50 flex justify-center">
-                <Link to="/shop" className="text-[12px] font-bold text-[#2d6a4f] uppercase tracking-widest hover:underline">View All Products</Link>
+              <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
+                <div className="flex flex-col divide-y divide-gray-50">
+                  {productLinks.map((item, index) => (
+                    <Link 
+                      key={index}
+                      to={item.link}
+                      className="flex items-center gap-4 px-6 py-4 text-[#4a5568] hover:text-[#2d6a4f] hover:bg-gray-50/50 transition-all group/item"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center group-hover/item:bg-primary-600 transition-colors shrink-0">
+                        <Leaf className="w-5 h-5 text-primary-600 group-hover/item:text-white transition-colors" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-bold text-sm tracking-tight">{item.name}</span>
+                        <span className="text-[10px] text-gray-400 font-medium">Explore Products</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-primary-600 px-6 py-4 flex justify-between items-center">
+                <Link to="/shop" className="text-white text-[10px] font-black uppercase tracking-widest hover:underline w-full text-center">View All Products</Link>
               </div>
             </div>
           </div>
@@ -151,9 +162,10 @@ const Navbar = () => {
                       key={index}
                       to={item.link}
                       onClick={toggleMenu}
-                      className="text-gray-500 font-medium"
+                      className="flex items-center gap-3 py-3 border-b border-gray-50 last:border-0"
                     >
-                      {item.name}
+                      <Leaf className="w-3 h-3 text-primary-600" />
+                      <span className="text-gray-600 font-bold text-sm">{item.name}</span>
                     </Link>
                   ))}
                 </div>

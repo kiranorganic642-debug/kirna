@@ -13,6 +13,12 @@ export const useProducts = () => {
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
+    // If initialProducts is empty, we want to clear everything to fulfill user request
+    if (initialProducts.length === 0) {
+      localStorage.removeItem('products');
+      return [];
+    }
+    
     const saved = localStorage.getItem('products');
     if (saved) {
       const parsedProducts = JSON.parse(saved);

@@ -50,13 +50,12 @@ const Footer = () => {
 
           {/* Health Solutions */}
           <div>
-            <h4 className="text-accent-400 font-black text-xs uppercase tracking-[0.2em] mb-8">Health Solutions</h4>
+            <h4 className="text-accent-400 font-black text-xs uppercase tracking-[0.2em] mb-8">Quick Links</h4>
             <ul className="space-y-5">
-              <li><Link to="/shop?search=Liver" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Liver & Detox Care</Link></li>
-              <li><Link to="/shop?search=Kidney" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Kidney Wellness</Link></li>
-              <li><Link to="/shop?search=PCOS" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Hormonal Balance</Link></li>
-              <li><Link to="/shop?search=Diabetes" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Diabetes Management</Link></li>
-              <li><Link to="/shop?search=Stamina" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Energy & Vitality</Link></li>
+              <li><Link to="/shop" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">All Products</Link></li>
+              <li><Link to="/appointment" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Free Consultation</Link></li>
+              <li><Link to="/about" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Our Heritage</Link></li>
+              <li><Link to="/contact" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -64,11 +63,10 @@ const Footer = () => {
           <div>
             <h4 className="text-accent-400 font-black text-xs uppercase tracking-[0.2em] mb-8">Customer Care</h4>
             <ul className="space-y-5">
-              <li><Link to="/appointment" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Free Consultation</Link></li>
-              <li><Link to="/about" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Our Heritage</Link></li>
-              <li><Link to="/contact" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Contact Us</Link></li>
               <li><Link to="/track-order" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Track Order</Link></li>
               <li><Link to="/faq" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Shipping Policy</Link></li>
+              <li><Link to="/privacy" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-primary-100/70 hover:text-white transition-colors text-sm font-medium">Terms of Service</Link></li>
             </ul>
           </div>
 
