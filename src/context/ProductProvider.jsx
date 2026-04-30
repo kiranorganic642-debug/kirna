@@ -21,12 +21,33 @@ export const ProductProvider = ({ children }) => {
     
     const saved = localStorage.getItem('products');
     if (saved) {
-      const parsedProducts = JSON.parse(saved);
-      // Merge newly added products from initialProducts that aren't in localStorage yet
-      const existingIds = new Set(parsedProducts.map(p => p.id));
-      const newProductsToAdd = initialProducts.filter(p => !existingIds.has(p.id));
-      // Prepend new products to ensure visibility for existing users
-      return [...newProductsToAdd, ...parsedProducts];
+      try {
+        const parsedProducts = JSON.parse(saved);
+        
+        // Refresh image URLs from initialProducts for products that exist in both
+        // This prevents broken images when build hashes change
+        const refreshedProducts = parsedProducts.map(savedProduct => {
+          const freshProduct = initialProducts.find(p => p.id === savedProduct.id);
+          if (freshProduct) {
+            return {
+              ...savedProduct,
+              image: freshProduct.image, // Always use the fresh image URL from the current build
+              name: freshProduct.name,   // Also refresh name and category in case they changed
+              category: freshProduct.category
+            };
+          }
+          return savedProduct;
+        });
+
+        // Merge newly added products from initialProducts that aren't in localStorage yet
+        const existingIds = new Set(refreshedProducts.map(p => p.id));
+        const newProductsToAdd = initialProducts.filter(p => !existingIds.has(p.id));
+        
+        return [...newProductsToAdd, ...refreshedProducts];
+      } catch (e) {
+        console.error("Error loading products from localStorage:", e);
+        return initialProducts;
+      }
     }
     return initialProducts;
   });
