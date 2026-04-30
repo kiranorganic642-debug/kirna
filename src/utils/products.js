@@ -27,7 +27,7 @@ import SpineSprayOil from '../assets/Product/Organic spine spray oil.png';
 import SlipDiskSpray from '../assets/Product/Slip Disk pain relief spray.png';
 import GlowingSkinEffervescence from '../assets/Product/Strawberry lemon effervescence for glowing skin.png';
 import ZenoraLiverDetoxTea from '../assets/Product/Zenora Organic Liver Detox Tea.png';
-import MenStaminaBooster from "../assets/Product/men's stamina booster juice.png";
+import MenStaminaBooster from "../assets/Product/Men's stamina booster juice.png";
 import MoringaSoup from '../assets/Product/organic moringa soup.png';
 import SlimTea from '../assets/Product/organic slim tea.png';
 
@@ -56,7 +56,7 @@ export const categoryProducts = {
   'Green juice': ['Organic green juice for PCOS'],
   'Colestro veda': ['Organic Glow Veda products', 'Strawberry lemon effervescence for glowing skin'],
   'Pcos pcod care juice': ['Organic green juice for PCOS', 'Organic Post Pregnancy Spray'],
-  'Sea buckthon jouce man stamina booster j': ['men\'s stamina booster juice', 'Organic Sea Buckthorn Juice', 'Manthrive Capsule', 'Manthrive Syrup'],
+  'Sea buckthon jouce man stamina booster j': ['Men\'s stamina booster juice', 'Organic Sea Buckthorn Juice', 'Manthrive Capsule', 'Manthrive Syrup'],
   'Sea buckthon ABC malt': ['Organic Seabuckthorn malt powder'],
   'Liver detox': ['Organic Liver Detox Tea', 'Zenora Organic Liver Detox Tea'],
   'Kidney detox': ['Kiran\'s Organic Kidney Detox pouch', 'Organic kidney detox bottles', 'Organic kidney detox tea', 'Kidney Spray'],
@@ -75,7 +75,7 @@ export const categoryProducts = {
 export const allProducts = [
   { id: 1, name: "Organic green juice for PCOS", price: 599, originalPrice: 799, rating: 4.8, reviews: 120, image: PCOSGreenJuice, category: 'Green juice', description: "Natural green juice specifically formulated for PCOS management." },
   { id: 2, name: "Organic Glow Veda products", price: 899, originalPrice: 1199, rating: 4.9, reviews: 85, image: GlowVeda, category: 'Colestro veda', description: "Ayurvedic solution for cholesterol and heart health." },
-  { id: 3, name: "men's stamina booster juice", price: 699, originalPrice: 899, rating: 4.7, reviews: 150, image: MenStaminaBooster, category: 'Sea buckthon jouce man stamina booster j', description: "Powerful booster juice for men's vitality and stamina." },
+  { id: 3, name: "Men's stamina booster juice", price: 699, originalPrice: 899, rating: 4.7, reviews: 150, image: MenStaminaBooster, category: 'Sea buckthon jouce man stamina booster j', description: "Powerful booster juice for men's vitality and stamina." },
   { id: 4, name: "Organic Sea Buckthorn Juice", price: 750, originalPrice: 950, rating: 4.8, reviews: 90, image: SeaBuckthornJuice, category: 'Sea buckthon jouce man stamina booster j', description: "Pure Sea Buckthorn juice rich in Omega fatty acids." },
   { id: 5, name: "Organic Seabuckthorn malt powder", price: 450, originalPrice: 550, rating: 4.6, reviews: 65, image: SeaBuckthornMalt, category: 'Sea buckthon ABC malt', description: "Nutritious malt powder with the goodness of Seabuckthorn." },
   { id: 6, name: "Organic Liver Detox Tea", price: 399, originalPrice: 499, rating: 4.7, reviews: 110, image: LiverDetoxTea, category: 'Liver detox', description: "Herbal tea blend for natural liver detoxification." },
