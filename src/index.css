@@ -44,6 +44,35 @@
   }
 }
 
+@utility leaf-texture {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/leaves.png");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@utility section-alternate-1 {
+  @apply bg-white;
+}
+
+@utility section-alternate-2 {
+  @apply bg-herbal-light;
+}
+
+@utility hero-overlay {
+  background: linear-gradient(to right, rgba(27, 67, 50, 0.85) 0%, rgba(27, 67, 50, 0.4) 50%, rgba(27, 67, 50, 0) 100%);
+}
+
+@utility premium-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
 @layer components {
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-12;
@@ -55,36 +84,6 @@
   
   .btn-secondary {
     @apply bg-white text-primary-600 border-2 border-primary-600 px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest transition-all duration-500 hover:bg-primary-50 active:scale-95;
-  }
-
-  .leaf-texture {
-    position: relative;
-  }
-
-  .leaf-texture::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("https://www.transparenttextures.com/patterns/leaves.png");
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .section-alternate-1 {
-    @apply bg-white;
-  }
-
-  .section-alternate-2 {
-    @apply bg-herbal-light;
-  }
-
-  .hero-overlay {
-    background: linear-gradient(to right, rgba(27, 67, 50, 0.85) 0%, rgba(27, 67, 50, 0.4) 50%, rgba(27, 67, 50, 0) 100%);
-  }
-
-  .premium-shadow {
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
   }
 }
 
