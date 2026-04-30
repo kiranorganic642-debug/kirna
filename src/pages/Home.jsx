@@ -112,7 +112,7 @@ const Home = () => {
       </section>
 
       {/* 3. Categories Section - Circle Icons */}
-      <section className="py-24 section-alternate-1">
+      <section className="py-24 section-alternate-1 leaf-texture">
         <div className="container text-center mb-20">
           <h2 className="text-5xl lg:text-6xl font-bold text-primary-700 mb-6">Categories</h2>
           <p className="text-gray-500 text-xl italic max-w-2xl mx-auto">Discover natural healing with herbs, wellness, therapy, and care.</p>
@@ -167,7 +167,7 @@ const Home = () => {
       </section>
 
       {/* 5. Shop Section (Grid) */}
-      <section className="py-24 section-alternate-2">
+      <section className="py-24 section-alternate-2 leaf-texture">
         <div className="container text-center mb-20">
           <h2 className="text-5xl lg:text-6xl font-bold text-primary-700 mb-6">Shop</h2>
           <p className="text-gray-500 text-xl italic max-w-2xl mx-auto">Shop authentic Ayurvedic products for holistic wellness today!</p>
@@ -210,7 +210,7 @@ const Home = () => {
       </section>
 
       {/* 6. "What we do" Section */}
-      <section className="py-28 section-alternate-1">
+      <section className="py-28 section-alternate-1 leaf-texture">
         <div className="container">
           <div className="text-center mb-20 max-w-4xl mx-auto">
             <h2 className="text-5xl lg:text-6xl font-bold text-primary-700 mb-10">What we do</h2>
@@ -243,7 +243,7 @@ const Home = () => {
       </section>
 
       {/* 4. Categories Section */}
-      <section className="py-24 section-alternate-1">
+      <section className="py-24 section-alternate-1 leaf-texture">
         <div className="container text-center mb-16">
           <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-xs mb-4 block">Our Solutions</span>
           <h2 className="text-5xl lg:text-6xl font-bold text-primary-700 mb-6">Shop by Concern</h2>
@@ -269,7 +269,7 @@ const Home = () => {
       </section>
 
       {/* 5. About Section (Image + Text Split) */}
-      <section className="py-28 section-alternate-2 overflow-hidden">
+      <section className="py-28 section-alternate-2 leaf-texture overflow-hidden">
         <div className="container">
           <div className="flex flex-col lg:flex-row items-center gap-24">
             <div className="flex-1">
@@ -306,7 +306,7 @@ const Home = () => {
       </section>
 
       {/* 6. Services / Features Cards */}
-      <section className="py-24 section-alternate-1">
+      <section className="py-24 section-alternate-1 leaf-texture">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {[
@@ -326,7 +326,7 @@ const Home = () => {
       </section>
 
       {/* 7. Testimonials Section */}
-      <section className="py-24 section-alternate-2">
+      <section className="py-24 section-alternate-2 leaf-texture">
         <div className="container text-center mb-20">
           <h2 className="text-5xl lg:text-6xl font-bold text-primary-700 mb-6">Testimonials</h2>
           <p className="text-xl text-gray-500 italic">What our clients say about us.</p>
@@ -353,7 +353,7 @@ const Home = () => {
       </section>
 
       {/* 8. Newsletter Section */}
-      <section className="py-24 section-alternate-1">
+      <section className="py-24 section-alternate-1 leaf-texture">
         <div className="container">
           <div className="bg-primary-600 rounded-[3rem] p-16 lg:p-24 text-center relative overflow-hidden shadow-2xl">
             <div className="relative z-10 max-w-3xl mx-auto">

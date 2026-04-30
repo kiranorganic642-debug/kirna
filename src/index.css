@@ -72,11 +72,11 @@
   }
 
   .section-alternate-1 {
-    @apply bg-white leaf-texture;
+    @apply bg-white;
   }
 
   .section-alternate-2 {
-    @apply bg-herbal-light leaf-texture;
+    @apply bg-herbal-light;
   }
 
   .hero-overlay {
