@@ -58,65 +58,68 @@ const Shop = () => {
   }, [searchQuery, selectedCategory, sortBy, priceRange]);
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
+    <div className="bg-beige min-h-screen py-12 font-sans">
       <div className="container">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Shop Our Products</h1>
-            <p className="text-gray-600">Pure, organic, and handpicked just for you — crafted for everyday wellness.</p>
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div className="max-w-2xl">
+            <span className="text-primary-600 font-bold text-[10px] uppercase tracking-widest mb-4 block">Wellness Solutions</span>
+            <h1 className="text-5xl lg:text-6xl font-bold text-primary-700 mb-4">Ayurvedic Shop</h1>
+            <p className="text-gray-500 font-medium italic">Rooted in heritage, hand-crafted for your modern wellness journey.</p>
           </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="relative flex-grow md:w-80">
+          <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
+            <div className="relative flex-grow md:w-96">
               <input 
                 type="text" 
-                placeholder="Search products..." 
-                className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all shadow-sm"
+                placeholder="Search solutions (e.g. Liver, Kidney)..." 
+                className="w-full pl-14 pr-4 py-4 bg-white border border-gray-100 rounded-full focus:outline-none focus:ring-4 focus:ring-primary-50 transition-all shadow-sm font-medium text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-primary-600 w-5 h-5" />
             </div>
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden p-3 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 text-gray-600"
+              className="lg:hidden p-4 bg-white border border-gray-100 rounded-full hover:bg-gray-50 text-primary-600 shadow-sm transition-all"
             >
               <SlidersHorizontal className="w-6 h-6" />
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        {/* Trust Indicators */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
           {[
-            { icon: <ShieldCheck className="w-5 h-5" />, title: 'Quality First', desc: 'Carefully selected, clean ingredients.' },
-            { icon: <Truck className="w-5 h-5" />, title: 'Fast Dispatch', desc: 'Packed safely for doorstep delivery.' },
-            { icon: <RefreshCw className="w-5 h-5" />, title: 'Easy Support', desc: 'Quick help for orders & guidance.' }
+            { icon: <ShieldCheck className="w-6 h-6" />, title: 'Pure Formulations', desc: '100% natural and lab tested.' },
+            { icon: <Truck className="w-6 h-6" />, title: 'Premium Shipping', desc: 'Securely delivered to your doorstep.' },
+            { icon: <RefreshCw className="w-6 h-6" />, title: 'Expert Guidance', desc: 'Consult our doctors anytime.' }
           ].map((item, i) => (
-            <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center shrink-0">
+            <div key={i} className="bg-white rounded-[2rem] border border-gray-50 p-6 flex items-center gap-5 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 rounded-2xl bg-primary-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-primary-50">
                 {item.icon}
               </div>
               <div>
-                <div className="font-bold text-gray-900">{item.title}</div>
-                <div className="text-sm text-gray-500">{item.desc}</div>
+                <div className="font-bold text-xs uppercase tracking-widest text-primary-700 mb-1">{item.title}</div>
+                <div className="text-xs text-gray-500 font-medium">{item.desc}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex gap-12">
           {/* Desktop Sidebar Filters */}
-          <aside className="hidden lg:block w-64 shrink-0 space-y-8">
+          <aside className="hidden lg:block w-72 shrink-0 space-y-12">
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Categories</h3>
-              <div className="space-y-2">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Health Categories</h3>
+              <div className="space-y-3">
                 {categories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`w-full text-left px-4 py-2 rounded-lg transition-all ${
+                    className={`w-full text-left px-6 py-3.5 rounded-2xl transition-all text-sm font-bold tracking-tight ${
                       selectedCategory === cat 
-                        ? 'bg-primary-600 text-white font-medium shadow-md' 
-                        : 'text-gray-600 hover:bg-primary-50 hover:text-primary-600'
+                        ? 'bg-primary-600 text-white shadow-xl shadow-primary-50' 
+                        : 'text-gray-500 hover:bg-white hover:text-primary-600 hover:shadow-sm'
                     }`}
                   >
                     {cat}
@@ -126,31 +129,31 @@ const Shop = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Price Range</h3>
-              <div className="space-y-4">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Price Limit (₹)</h3>
+              <div className="space-y-6 px-2">
                 <input 
                   type="range" 
-                  className="w-full accent-primary-600" 
+                  className="w-full accent-primary-600 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer" 
                   min="0" 
                   max="10000" 
                   value={priceRange}
                   onChange={(e) => setPriceRange(parseInt(e.target.value))}
                 />
-                <div className="flex items-center justify-between text-sm text-gray-600 font-medium">
+                <div className="flex items-center justify-between text-xs font-bold text-primary-600 uppercase tracking-widest">
                   <span>₹0</span>
-                  <span>₹{priceRange}</span>
+                  <span className="bg-primary-600 text-white px-3 py-1 rounded-full">₹{priceRange}</span>
                 </div>
               </div>
             </div>
 
             {!user && (
-               <div className="bg-primary-900 rounded-2xl p-6 text-white overflow-hidden relative">
+               <div className="bg-primary-600 rounded-[2.5rem] p-8 text-white overflow-hidden relative shadow-2xl shadow-primary-50">
                  <div className="relative z-10">
-                   <h4 className="font-bold text-xl mb-2">Special Offer!</h4>
-                   <p className="text-primary-200 text-sm mb-4">Get 10% extra discount on your first order.</p>
-                   <Link to="/register" className="text-white font-bold underline decoration-primary-400 decoration-2 underline-offset-4">Sign Up Now</Link>
+                   <h4 className="font-bold text-2xl mb-3">Join Veda</h4>
+                   <p className="text-primary-50/80 text-sm mb-6 leading-relaxed">Get 10% extra discount on your first Ayurvedic order.</p>
+                   <Link to="/register" className="inline-block bg-white text-primary-600 px-6 py-3 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-primary-50 transition-all">Sign Up Now</Link>
                  </div>
-                 <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-32 h-32 bg-primary-800 rounded-full blur-2xl" />
+                 <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
                </div>
              )}
           </aside>
@@ -158,21 +161,21 @@ const Shop = () => {
           {/* Product Grid Area */}
           <div className="flex-grow">
             {/* Toolbar */}
-            <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-8">
-              <div className="text-sm text-gray-600 font-medium">
-                Showing <span className="text-gray-900">{filteredProducts.length}</span> results
+            <div className="bg-white p-5 rounded-[2rem] border border-gray-50 shadow-sm flex flex-wrap items-center justify-between gap-6 mb-12">
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                Found <span className="text-primary-600 font-bold">{filteredProducts.length}</span> Solutions
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1 border border-gray-100 rounded-lg p-1 bg-gray-50">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 bg-beige p-1.5 rounded-2xl">
                   <button 
                     onClick={() => setViewMode('grid')}
-                    className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-white shadow-sm text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+                    className={`p-2.5 rounded-xl transition-all ${viewMode === 'grid' ? 'bg-white shadow-md text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
                   >
                     <LayoutGrid className="w-5 h-5" />
                   </button>
                   <button 
                     onClick={() => setViewMode('list')}
-                    className={`p-1.5 rounded-md transition-all ${viewMode === 'list' ? 'bg-white shadow-sm text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
+                    className={`p-2.5 rounded-xl transition-all ${viewMode === 'list' ? 'bg-white shadow-md text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}
                   >
                     <List className="w-5 h-5" />
                   </button>
@@ -181,11 +184,11 @@ const Shop = () => {
                   <select 
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="appearance-none bg-white border border-gray-200 rounded-lg pl-4 pr-10 py-2 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer"
+                    className="appearance-none bg-beige border-none rounded-2xl pl-6 pr-12 py-3.5 text-xs font-bold text-primary-600 uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-primary-50 cursor-pointer"
                   >
                     {sortOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                  <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-primary-600 pointer-events-none" />
                 </div>
               </div>
             </div>
@@ -193,61 +196,61 @@ const Shop = () => {
             {/* Products */}
             {filteredProducts.length > 0 ? (
               <div className={viewMode === 'grid' 
-                ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
-                : "flex flex-col gap-6"
+                ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"
+                : "flex flex-col gap-8"
               }>
                 {filteredProducts.map((product) => (
                   <div 
                     key={product.id} 
-                    className={`bg-white rounded-2xl border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-300 ${
-                      viewMode === 'list' ? 'flex flex-col sm:flex-row items-center p-4 gap-6' : ''
+                    className={`bg-white rounded-[2.5rem] border border-gray-50 overflow-hidden group hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full ${
+                      viewMode === 'list' ? 'flex-row p-6 gap-8' : ''
                     }`}
                   >
-                    <div className={`relative overflow-hidden ${viewMode === 'list' ? 'w-full sm:w-48 h-48 rounded-xl' : 'aspect-square bg-gray-50 flex items-center justify-center p-4'}`}>
+                    <div className={`relative overflow-hidden ${viewMode === 'list' ? 'w-64 h-64 shrink-0 rounded-[2rem]' : 'aspect-[4/5] bg-beige/30 flex items-center justify-center p-8'}`}>
                       <img 
                         src={product.image} 
                         alt={product.name}
-                        className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
                       />
                       <button 
                         onClick={() => toggleWishlist(product)}
-                        className={`absolute top-4 left-4 p-2 rounded-full shadow-sm border transition-all ${
+                        className={`absolute top-5 left-5 p-3 rounded-2xl shadow-lg transition-all z-10 ${
                           isInWishlist(product.id) 
-                            ? 'bg-red-500 text-white border-red-500' 
-                            : 'bg-white/90 text-gray-400 border-gray-100 hover:text-red-500'
+                            ? 'bg-red-500 text-white' 
+                            : 'bg-white/90 text-gray-400 hover:text-red-500'
                         }`}
                       >
-                        <Heart className={`w-4 h-4 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
+                        <Heart className={`w-5 h-5 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
                       </button>
                       {product.originalPrice > product.price && (
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold text-primary-600">
-                          {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
+                        <div className="absolute top-5 right-5 z-10 bg-primary-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                          Sale
                         </div>
                       )}
                     </div>
-                    <div className={`p-6 ${viewMode === 'list' ? 'flex-grow py-0' : ''}`}>
-                      <div className="text-xs text-primary-600 font-bold uppercase tracking-wider mb-2">{product.category}</div>
-                      <h3 className="font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                    <div className={`p-8 flex flex-col flex-grow ${viewMode === 'list' ? 'py-4' : ''}`}>
+                      <div className="text-[10px] text-primary-500 font-bold uppercase tracking-[0.2em] mb-3">{product.category}</div>
+                      <h3 className="font-bold text-xl text-primary-700 mb-4 group-hover:text-primary-600 transition-colors line-clamp-2">
                         <Link to={`/product/${product.id}`}>{product.name}</Link>
                       </h3>
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="flex text-yellow-400">
+                      <div className="flex items-center gap-2 mb-6">
+                        <div className="flex text-primary-500">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} />
+                            <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} />
                           ))}
                         </div>
-                        <span className="text-xs text-gray-500">({product.reviews})</span>
+                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">({product.reviews} Reviews)</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-xl font-bold text-gray-900">₹{product.price}</span>
-                          <span className="text-sm text-gray-400 line-through">₹{product.originalPrice}</span>
+                      <div className="mt-auto pt-6 flex items-center justify-between border-t border-gray-50">
+                        <div className="flex flex-col">
+                          <span className="text-xs text-gray-400 line-through">₹{product.originalPrice}</span>
+                          <span className="text-2xl font-bold text-primary-600">₹{product.price}</span>
                         </div>
                         <button 
                           onClick={() => addToCart(product)}
-                          className="p-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors"
+                          className="w-14 h-14 bg-primary-600 text-white rounded-2xl hover:bg-primary-700 transition-all duration-300 shadow-xl shadow-primary-50 flex items-center justify-center active:scale-95"
                         >
-                          <ShoppingBag className="w-5 h-5" />
+                          <ShoppingBag className="w-6 h-6" />
                         </button>
                       </div>
                     </div>
@@ -255,13 +258,13 @@ const Shop = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-200">
-                <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">No products found</h3>
-                <p className="text-gray-500 mb-8">Try adjusting your search or filters to find what you're looking for.</p>
+              <div className="text-center py-24 bg-white rounded-[3rem] border border-dashed border-gray-200">
+                <Search className="w-20 h-20 text-gray-200 mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-primary-700 mb-3">No solutions found</h3>
+                <p className="text-gray-500 font-medium italic mb-10 max-w-sm mx-auto">Try adjusting your filters or search keywords to find what you're looking for.</p>
                 <button 
                   onClick={() => {setSearchQuery(''); setSelectedCategory('All');}}
-                  className="btn-primary"
+                  className="px-10 py-4 bg-primary-600 text-white rounded-full font-bold text-xs uppercase tracking-widest shadow-xl shadow-primary-50"
                 >
                   Clear All Filters
                 </button>
