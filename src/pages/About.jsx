@@ -1,7 +1,7 @@
 import React from 'react';
 import { Users, ShieldCheck, Target, Heart, Award, CheckCircle2 } from 'lucide-react';
 import Logo from '../components/Logo';
-import GlowVeda from '../assets/Product/Organic Glow Veda products.png';
+import GlowVeda from '../assets/Product/organic-glow-veda.png';
 import DoctorPhoto from '../assets/Doctor photo.jpeg';
 
 const About = () => {
