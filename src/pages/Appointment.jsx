@@ -48,7 +48,7 @@ const Appointment = () => {
   };
 
   const sendWhatsAppToDoctor = (data) => {
-    const doctorPhone = '919830000000'; // Replace with actual doctor's WhatsApp number
+    const doctorPhone = '918100260124'; // Replace with actual doctor's WhatsApp number
     const message = `*New Appointment Request*%0A%0A*Patient:* ${data.patientName}%0A*Phone:* ${data.phoneNumber}%0A*Date:* ${data.date}%0A*Time:* ${data.timeSlot}%0A*Problem:* ${data.problem || 'Not specified'}`;
     window.open(`https://wa.me/${doctorPhone}?text=${message}`, '_blank');
   };
