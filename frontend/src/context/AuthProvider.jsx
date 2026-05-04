@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
-const API_URL = '/api';
+// Backend API URL from environment variables or fallback
+const API_URL = import.meta.env.VITE_API_URL || 'https://kirna-backend-3.onrender.com/api';
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
