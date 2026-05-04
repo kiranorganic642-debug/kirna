@@ -57,25 +57,25 @@ const Cart = () => {
           {/* Cart Items */}
           <div className="flex-grow space-y-4">
             {cart.map((item) => (
-              <div key={item.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center gap-6">
+              <div key={`${item.id}-${item.selectedSize}`} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center gap-6">
                 <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center p-2">
                   <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                 </div>
                 <div className="flex-grow text-center sm:text-left">
                   <h3 className="font-bold text-gray-900 text-lg mb-1">{item.name}</h3>
-                  <p className="text-sm text-gray-500 mb-2">{item.category}</p>
+                  <p className="text-sm text-gray-500 mb-2">{item.category} {item.selectedSize ? `(${item.selectedSize})` : ''}</p>
                   <div className="text-primary-600 font-bold">₹{item.price}</div>
                 </div>
                 <div className="flex items-center gap-4 bg-gray-50 rounded-xl p-2 border border-gray-100">
                   <button 
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    onClick={() => updateQuantity(item.id, item.selectedSize, item.quantity - 1)}
                     className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
                   <span className="w-8 text-center font-bold text-gray-900">{item.quantity}</span>
                   <button 
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    onClick={() => updateQuantity(item.id, item.selectedSize, item.quantity + 1)}
                     className="p-1 hover:bg-white rounded-md transition-colors text-gray-600"
                   >
                     <Plus className="w-4 h-4" />
@@ -84,7 +84,7 @@ const Cart = () => {
                 <div className="text-right shrink-0">
                   <div className="font-bold text-gray-900 mb-2">₹{item.price * item.quantity}</div>
                   <button 
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeFromCart(item.id, item.selectedSize)}
                     className="text-red-500 hover:text-red-600 p-2 hover:bg-red-50 rounded-full transition-all"
                   >
                     <Trash2 className="w-5 h-5" />

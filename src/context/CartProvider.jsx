@@ -11,30 +11,39 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('kiran-health-cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+      // Find if item with same ID AND same size already exists
+      const existingItem = prevCart.find(
+        (item) => item.id === product.id && item.selectedSize === product.selectedSize
+      );
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id && item.selectedSize === product.selectedSize
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...product, quantity }];
     });
   };
 
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  const removeFromCart = (productId, selectedSize) => {
+    setCart((prevCart) => prevCart.filter(
+      (item) => !(item.id === productId && item.selectedSize === selectedSize)
+    ));
   };
 
-  const updateQuantity = (productId, quantity) => {
+  const updateQuantity = (productId, selectedSize, quantity) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(productId, selectedSize);
       return;
     }
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === productId && item.selectedSize === selectedSize
+          ? { ...item, quantity }
+          : item
       )
     );
   };

@@ -86,7 +86,7 @@ const Wishlist = () => {
                   
                   <div className="flex gap-2">
                     <button 
-                      onClick={() => addToCart(product)}
+                      onClick={() => addToCart({ ...product, selectedSize: product.defaultSize || '500g' })}
                       className="flex-grow flex items-center justify-center gap-2 py-3.5 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition-all shadow-lg shadow-primary-200"
                     >
                       <ShoppingBag className="w-4 h-4" />

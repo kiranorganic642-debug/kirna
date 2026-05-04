@@ -27,8 +27,8 @@ const Logo = () => {
         ))}
       </svg>
       <div className="flex flex-col">
-        <span className="text-lg font-bold text-gray-900 leading-none">Kiran's</span>
-        <span className="text-[9px] text-primary-600 font-medium tracking-wider uppercase">Kiran Organic</span>
+        <span className="text-lg font-bold text-gray-900 leading-none">Kiran's Organic</span>
+        {/* <span className="text-[9px] text-primary-600 font-medium tracking-wider uppercase">Kiran's Organic</span> */}
       </div>
     </div>
   );

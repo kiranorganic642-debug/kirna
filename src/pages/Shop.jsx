@@ -5,6 +5,7 @@ import { useWishlist } from '../context/WishlistProvider';
 import { useProducts } from '../context/ProductProvider';
 import { useAuth } from '../context/AuthProvider';
 import { Link, useLocation } from 'react-router-dom';
+import ProductCard from '../components/ProductCard';
 
 import { categories } from '../utils/products';
 
@@ -43,10 +44,11 @@ const Shop = () => {
   const filteredProducts = useMemo(() => {
     return products
       .filter(product => {
+        if (!product || !product.name) return false;
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            product.category.toLowerCase().includes(searchQuery.toLowerCase());
+                            (product.category && product.category.toLowerCase().includes(searchQuery.toLowerCase()));
         const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-        const matchesPrice = product.price <= priceRange;
+        const matchesPrice = (product.price || 0) <= priceRange;
         return matchesSearch && matchesCategory && matchesPrice;
       })
       .sort((a, b) => {
@@ -200,61 +202,11 @@ const Shop = () => {
                 : "flex flex-col gap-8"
               }>
                 {filteredProducts.map((product) => (
-                  <div 
+                  <ProductCard 
                     key={product.id} 
-                    className={`bg-white rounded-[2.5rem] border border-gray-50 overflow-hidden group hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full ${
-                      viewMode === 'list' ? 'flex-row p-6 gap-8' : ''
-                    }`}
-                  >
-                    <div className={`relative overflow-hidden ${viewMode === 'list' ? 'w-64 h-64 shrink-0 rounded-[2rem]' : 'aspect-[4/5] bg-beige/30 flex items-center justify-center p-8'}`}>
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <button 
-                        onClick={() => toggleWishlist(product)}
-                        className={`absolute top-5 left-5 p-3 rounded-2xl shadow-lg transition-all z-10 ${
-                          isInWishlist(product.id) 
-                            ? 'bg-red-500 text-white' 
-                            : 'bg-white/90 text-gray-400 hover:text-red-500'
-                        }`}
-                      >
-                        <Heart className={`w-5 h-5 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
-                      </button>
-                      {product.originalPrice > product.price && (
-                        <div className="absolute top-5 right-5 z-10 bg-primary-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
-                          Sale
-                        </div>
-                      )}
-                    </div>
-                    <div className={`p-8 flex flex-col flex-grow ${viewMode === 'list' ? 'py-4' : ''}`}>
-                      <div className="text-[10px] text-primary-500 font-bold uppercase tracking-[0.2em] mb-3">{product.category}</div>
-                      <h3 className="font-bold text-xl text-primary-700 mb-4 group-hover:text-primary-600 transition-colors line-clamp-2">
-                        <Link to={`/product/${product.id}`}>{product.name}</Link>
-                      </h3>
-                      <div className="flex items-center gap-2 mb-6">
-                        <div className="flex text-primary-500">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} />
-                          ))}
-                        </div>
-                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">({product.reviews} Reviews)</span>
-                      </div>
-                      <div className="mt-auto pt-6 flex items-center justify-between border-t border-gray-50">
-                        <div className="flex flex-col">
-                          <span className="text-xs text-gray-400 line-through">₹{product.originalPrice}</span>
-                          <span className="text-2xl font-bold text-primary-600">₹{product.price}</span>
-                        </div>
-                        <button 
-                          onClick={() => addToCart(product)}
-                          className="w-14 h-14 bg-primary-600 text-white rounded-2xl hover:bg-primary-700 transition-all duration-300 shadow-xl shadow-primary-50 flex items-center justify-center active:scale-95"
-                        >
-                          <ShoppingBag className="w-6 h-6" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                    product={product} 
+                    viewMode={viewMode} 
+                  />
                 ))}
               </div>
             ) : (

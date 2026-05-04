@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Star, ShoppingBag, Plus, Minus, ArrowLeft, ShieldCheck, Truck, RefreshCw, CheckCircle2, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -12,22 +12,56 @@ const ProductDetail = () => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
-  const [selectedSize, setSelectedCategory] = useState('500g');
   const [isZoomed, setIsZoomed] = useState(false);
 
   const product = useMemo(() => {
     return products.find(p => p.id === parseInt(id)) || products[0];
   }, [id, products]);
 
-  const sizes = ['250g', '500g', '1kg'];
+  const sizes = useMemo(() => {
+    if (product && product.variants && product.variants.length > 0) {
+      return product.variants.map(v => v.size);
+    }
+    return ['250g', '500g', '1kg'];
+  }, [product]);
+
+  const [selectedSize, setSelectedCategory] = useState('1kg');
+
+  // Update selected size when product changes
+  useEffect(() => {
+    if (!product) return;
+    
+    if (product.defaultSize) {
+      setSelectedCategory(product.defaultSize);
+    } else if (product.variants && product.variants.length > 0) {
+      setSelectedCategory(product.variants[0].size);
+    } else {
+      setSelectedCategory('500g');
+    }
+  }, [product]);
+
+  const currentPrice = useMemo(() => {
+    if (!product) return 0;
+    if (product.variants && product.variants.length > 0) {
+      const variant = product.variants.find(v => v.size === selectedSize);
+      return variant ? variant.price : product.price;
+    }
+    return product.price;
+  }, [product, selectedSize]);
+
+  if (!product) {
+    return <div className="min-h-screen flex items-center justify-center">Loading product...</div>;
+  }
 
   const handleAddToCart = () => {
-    const productWithVariant = { ...product, name: `${product.name} (${selectedSize})` };
-    for (let i = 0; i < quantity; i++) {
-      addToCart(productWithVariant);
-    }
-    setQuantity(1);
-  };
+     const productWithVariant = { 
+       ...product, 
+       price: currentPrice,
+       selectedSize: selectedSize 
+     };
+     addToCart(productWithVariant, quantity);
+     setQuantity(1);
+   };
 
   return (
     <div className="bg-cream min-h-screen py-12 font-sans">
@@ -81,8 +115,10 @@ const ProductDetail = () => {
 
             <div className="mb-12 p-8 bg-white rounded-[2.5rem] border border-gray-50 shadow-sm inline-block w-fit">
               <div className="flex items-baseline gap-4 mb-3">
-                <span className="text-5xl font-black text-primary-600 tracking-tighter">₹{product.price}</span>
-                <span className="text-2xl text-gray-200 line-through font-bold">₹{product.originalPrice}</span>
+                <span className="text-5xl font-black text-primary-600 tracking-tighter">₹{currentPrice}</span>
+                {product.originalPrice > currentPrice && (
+                  <span className="text-2xl text-gray-200 line-through font-bold">₹{product.originalPrice}</span>
+                )}
               </div>
               <p className="text-primary-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-3">
                 <div className="w-2 h-2 bg-primary-600 rounded-full animate-pulse" />

@@ -13,44 +13,37 @@ export const useProducts = () => {
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
-    // Force reset if count is not 32 to ensure only assets products are shown
     const saved = localStorage.getItem('products');
     if (saved) {
       try {
         const parsedProducts = JSON.parse(saved);
+        if (!Array.isArray(parsedProducts)) return initialProducts;
         
-        // If the number of products in storage is different from initial, or if we want to ensure sync
-        // we filter to keep ONLY products that exist in initialProducts
-        const validProducts = parsedProducts.filter(savedProduct => 
-          initialProducts.some(p => p.id === savedProduct.id)
-        );
-
-        // Refresh image URLs and data from initialProducts
-        const refreshedProducts = validProducts.map(savedProduct => {
-          const freshProduct = initialProducts.find(p => p.id === savedProduct.id);
-          return {
-            ...savedProduct,
-            image: freshProduct.image,
-            name: freshProduct.name,
-            category: freshProduct.category,
-            price: freshProduct.price,
-            originalPrice: freshProduct.originalPrice
-          };
+        // Merge initialProducts with saved products
+        const initialIds = initialProducts.map(p => p.id);
+        
+        // Filter saved products: Keep if manually added (ID > 100) or still in initialProducts
+        const filteredSaved = parsedProducts.filter(p => {
+          if (!p || typeof p.id === 'undefined') return false;
+          if (initialIds.includes(p.id)) return true;
+          if (p.id > 100) return true; // Adjusted manually added ID threshold
+          return false;
         });
 
-        // Ensure we have exactly all initial products
-        const existingIds = new Set(refreshedProducts.map(p => p.id));
-        const missingProducts = initialProducts.filter(p => !existingIds.has(p.id));
+        const finalProducts = [...filteredSaved];
         
-        const finalProducts = [...missingProducts, ...refreshedProducts];
+        initialProducts.forEach(initialProduct => {
+          const index = finalProducts.findIndex(p => p && p.id === initialProduct.id);
+          if (index !== -1) {
+            finalProducts[index] = { ...finalProducts[index], ...initialProduct };
+          } else {
+            finalProducts.push(initialProduct);
+          }
+        });
         
-        // If after sync the count is still wrong (too many), just return initial
-        if (finalProducts.length !== initialProducts.length) {
-          return initialProducts;
-        }
-        
-        return finalProducts;
+        return finalProducts.length > 0 ? finalProducts : initialProducts;
       } catch (e) {
+        console.error("Error loading products from localStorage:", e);
         return initialProducts;
       }
     }

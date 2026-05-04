@@ -7,14 +7,14 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login, hasAdmin } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setError('');
-      login(email, password);
+      await login(email, password);
       navigate('/');
     } catch (err) {
       setError(err.message);
@@ -83,7 +83,7 @@ const Login = () => {
         <p className="text-center text-sm text-gray-500">
           Don't have an account? {' '}
           <Link to="/register" className="font-bold text-primary-600 hover:text-primary-700 transition-colors underline underline-offset-4">
-            {!hasAdmin ? 'Register Admin' : 'Sign up for free'}
+            Sign up for free
           </Link>
         </p>
       </div>

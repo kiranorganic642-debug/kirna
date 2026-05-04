@@ -29,9 +29,9 @@ import ForgotPassword from './pages/ForgotPassword';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
-  const { user, isAdmin, hasAdmin } = useAuth();
+  const { user, isAdmin, adminExists } = useAuth();
   if (!user) {
-    return <Navigate to={hasAdmin ? "/login" : "/register"} />;
+    return <Navigate to={adminExists ? "/login" : "/register"} />;
   }
   if (requireAdmin && !isAdmin) return <Navigate to="/" />;
   return children;

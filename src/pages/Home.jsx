@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import { motion as Motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductProvider';
+import ProductCard from '../components/ProductCard';
 
 import SliderImage from '../assets/banner/slider.webp';
 import DishImage from '../assets/banner/dish.webp';
@@ -178,36 +179,9 @@ const Home = () => {
           <p className="text-gray-500 text-xl italic max-w-2xl mx-auto">Shop authentic Ayurvedic products for holistic wellness today!</p>
         </div>
         <div className="container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-[2rem] overflow-hidden group hover:shadow-2xl transition-all duration-700 border border-gray-100 relative">
-                <div className="relative aspect-square bg-white p-8 flex items-center justify-center overflow-hidden">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-1000" />
-                  <div className="absolute top-4 right-4 bg-primary-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
-                    {product.rating ? `${product.rating.toFixed(1)} ★` : '5.0 ★'}
-                  </div>
-                </div>
-                <div className="p-8 border-t border-gray-50">
-                  <h3 className="font-bold text-primary-700 text-lg mb-2 line-clamp-1">
-                    <Link to={`/product/${product.id}`}>{product.name}</Link>
-                  </h3>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-xl font-bold text-primary-600">₹{product.price}</span>
-                    {product.originalPrice > product.price && (
-                      <span className="text-sm text-gray-400 line-through">₹{product.originalPrice}</span>
-                    )}
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      <span>Sold: {product.sold || 50}</span>
-                      <span>Remaining: {product.stock ? product.stock - (product.sold || 0) : 270}</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-primary-500" style={{ width: product.stock && product.sold ? `${((product.sold / product.stock) * 100).toFixed(0)}%` : '15%' }} />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
