@@ -171,7 +171,7 @@ const Checkout = () => {
                       onChange={handleChange}
                       required 
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 outline-none" 
-                      placeholder="alex@example.com" 
+                      placeholder="your@email.com" 
                     />
                   </div>
                   <div>
@@ -183,7 +183,7 @@ const Checkout = () => {
                       onChange={handleChange}
                       required 
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 outline-none" 
-                      placeholder="+91 98765 43210" 
+                      placeholder="Enter phone number" 
                     />
                   </div>
                 </div>
@@ -205,7 +205,7 @@ const Checkout = () => {
                       onChange={handleChange}
                       required 
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 outline-none" 
-                      placeholder="Alex Johnson" 
+                      placeholder="Enter full name" 
                     />
                   </div>
                   <div className="md:col-span-2">
@@ -217,7 +217,7 @@ const Checkout = () => {
                       onChange={handleChange}
                       required 
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 outline-none" 
-                      placeholder="123 Organic Lane" 
+                      placeholder="Enter street address" 
                     />
                   </div>
                   <div>
@@ -229,7 +229,7 @@ const Checkout = () => {
                       onChange={handleChange}
                       required 
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 outline-none" 
-                      placeholder="Pune" 
+                      placeholder="Enter city" 
                     />
                   </div>
                   <div>
@@ -241,7 +241,7 @@ const Checkout = () => {
                       onChange={handleChange}
                       required 
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 outline-none" 
-                      placeholder="411001" 
+                      placeholder="Enter PIN code" 
                     />
                   </div>
                 </div>

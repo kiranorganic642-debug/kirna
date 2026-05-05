@@ -25,10 +25,11 @@ const Profile = () => {
     navigate('/login');
   };
 
-  const [addresses, setAddresses] = useState([
-    { id: 1, type: 'Home', name: 'Alex Johnson', street: '123 Organic Lane', city: 'Pune', pin: '411001', isDefault: true },
-    { id: 2, type: 'Office', name: 'Alex Johnson', street: 'Tech Park, Tower B', city: 'Mumbai', pin: '400001', isDefault: false }
-  ]);
+  const [addresses, setAddresses] = useState([]);
+
+  const removeAddress = (id) => {
+    setAddresses(addresses.filter(addr => addr.id !== id));
+  };
 
   const menuItems = [
     { 
@@ -231,32 +232,45 @@ const Profile = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {addresses.map((addr) => (
-                    <div key={addr.id} className={`bg-white p-8 rounded-[2.5rem] border-2 transition-all relative group ${addr.isDefault ? 'border-primary-600 shadow-xl shadow-primary-50' : 'border-gray-100'}`}>
-                      {addr.isDefault && (
-                        <span className="absolute top-6 right-8 px-3 py-1 bg-primary-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full">Default</span>
-                      )}
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400">
-                          <MapPin className="w-5 h-5" />
+                  {addresses.length > 0 ? (
+                    addresses.map((addr) => (
+                      <div key={addr.id} className={`bg-white p-8 rounded-[2.5rem] border-2 transition-all relative group ${addr.isDefault ? 'border-primary-600 shadow-xl shadow-primary-50' : 'border-gray-100'}`}>
+                        {addr.isDefault && (
+                          <span className="absolute top-6 right-8 px-3 py-1 bg-primary-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full">Default</span>
+                        )}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400">
+                            <MapPin className="w-5 h-5" />
+                          </div>
+                          <h3 className="font-black text-gray-900 text-lg">{addr.type}</h3>
                         </div>
-                        <h3 className="font-black text-gray-900 text-lg">{addr.type}</h3>
+                        <div className="space-y-1 mb-8">
+                          <p className="font-bold text-gray-800">{addr.name}</p>
+                          <p className="text-gray-500 font-medium">{addr.street}</p>
+                          <p className="text-gray-500 font-medium">{addr.city} - {addr.pin}</p>
+                        </div>
+                        <div className="flex items-center gap-4 pt-6 border-t border-gray-50">
+                          <button className="text-xs font-black text-primary-600 uppercase tracking-widest flex items-center gap-2 hover:opacity-70 transition-all">
+                            <Edit2 className="w-3.5 h-3.5" /> Edit
+                          </button>
+                          <button 
+                            onClick={() => removeAddress(addr.id)}
+                            className="text-xs font-black text-red-500 uppercase tracking-widest flex items-center gap-2 hover:opacity-70 transition-all"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" /> Remove
+                          </button>
+                        </div>
                       </div>
-                      <div className="space-y-1 mb-8">
-                        <p className="font-bold text-gray-800">{addr.name}</p>
-                        <p className="text-gray-500 font-medium">{addr.street}</p>
-                        <p className="text-gray-500 font-medium">{addr.city} - {addr.pin}</p>
+                    ))
+                  ) : (
+                    <div className="col-span-full bg-white p-12 rounded-[2.5rem] border-2 border-dashed border-gray-100 text-center">
+                      <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-300 mx-auto mb-4">
+                        <MapPin className="w-8 h-8" />
                       </div>
-                      <div className="flex items-center gap-4 pt-6 border-t border-gray-50">
-                        <button className="text-xs font-black text-primary-600 uppercase tracking-widest flex items-center gap-2 hover:opacity-70 transition-all">
-                          <Edit2 className="w-3.5 h-3.5" /> Edit
-                        </button>
-                        <button className="text-xs font-black text-red-500 uppercase tracking-widest flex items-center gap-2 hover:opacity-70 transition-all">
-                          <Trash2 className="w-3.5 h-3.5" /> Remove
-                        </button>
-                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">No Addresses Found</h3>
+                      <p className="text-gray-500 font-medium mb-6">You haven't added any delivery addresses yet.</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             )}

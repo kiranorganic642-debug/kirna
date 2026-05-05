@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Star, ShoppingBag, Plus, Minus, ArrowLeft, ShieldCheck, Truck, RefreshCw, CheckCircle2, Heart } from 'lucide-react';
+import { Star, ShoppingBag, Plus, Minus, ArrowLeft, ShieldCheck, Truck, RefreshCw, CheckCircle2, Heart, XCircle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistProvider';
 import { useProducts } from '../context/ProductProvider';
@@ -40,20 +40,26 @@ const ProductDetail = () => {
     }
   }, [product]);
 
+  // Get current variant based on selected size
+  const currentVariant = useMemo(() => {
+    if (!product || !product.variants) return null;
+    return product.variants.find(v => v.size === selectedSize);
+  }, [product, selectedSize]);
+
   const currentPrice = useMemo(() => {
     if (!product) return 0;
-    if (product.variants && product.variants.length > 0) {
-      const variant = product.variants.find(v => v.size === selectedSize);
-      return variant ? variant.price : product.price;
+    if (currentVariant) {
+      return currentVariant.price;
     }
     return product.price;
-  }, [product, selectedSize]);
+  }, [product, currentVariant]);
 
   if (!product) {
     return <div className="min-h-screen flex items-center justify-center">Loading product...</div>;
   }
 
   const handleAddToCart = () => {
+     if (currentVariant?.outOfStock) return;
      const productWithVariant = { 
        ...product, 
        price: currentPrice,
@@ -120,9 +126,9 @@ const ProductDetail = () => {
                   <span className="text-2xl text-gray-200 line-through font-bold">₹{product.originalPrice}</span>
                 )}
               </div>
-              <p className="text-primary-600 font-black text-[10px] uppercase tracking-widest flex items-center gap-3">
-                <div className="w-2 h-2 bg-primary-600 rounded-full animate-pulse" />
-                Authentic & In Stock
+              <p className={`font-black text-[10px] uppercase tracking-widest flex items-center gap-3 ${currentVariant?.outOfStock ? 'text-red-500' : 'text-primary-600'}`}>
+                <div className={`w-2 h-2 rounded-full animate-pulse ${currentVariant?.outOfStock ? 'bg-red-500' : 'bg-primary-600'}`} />
+                {currentVariant?.outOfStock ? 'Out of Stock' : 'Authentic & In Stock'}
               </p>
             </div>
 
@@ -130,13 +136,20 @@ const ProductDetail = () => {
             <div className="mb-12">
               <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6">Traditional Packaging Size</p>
               <div className="flex gap-4">
-                {sizes.map((size) => (
+                {product.variants?.map((v) => (
                   <button
-                    key={size}
-                    onClick={() => setSelectedCategory(size)}
-                    className={`px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all border-2 ${selectedSize === size ? 'border-primary-600 bg-primary-50 text-primary-600 shadow-xl shadow-primary-50' : 'border-white bg-white text-gray-400 hover:border-primary-100 hover:text-primary-600 shadow-sm'}`}
+                    key={v.size}
+                    onClick={() => setSelectedCategory(v.size)}
+                    className={`px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all border-2 relative ${
+                      selectedSize === v.size 
+                        ? 'border-primary-600 bg-primary-50 text-primary-600 shadow-xl shadow-primary-50' 
+                        : 'border-white bg-white text-gray-400 hover:border-primary-100 hover:text-primary-600 shadow-sm'
+                    } ${v.outOfStock ? 'opacity-50' : ''}`}
                   >
-                    {size}
+                    {v.size}
+                    {v.outOfStock && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[8px] px-2 py-0.5 rounded-full">Out</span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -164,9 +177,18 @@ const ProductDetail = () => {
               </div>
               <button 
                 onClick={handleAddToCart}
-                className="flex-grow px-12 py-5 bg-primary-600 text-white rounded-full font-black text-sm uppercase tracking-widest flex items-center justify-center gap-4 shadow-2xl shadow-primary-100 hover:bg-primary-700 active:scale-[0.98] transition-all"
+                disabled={currentVariant?.outOfStock}
+                className={`flex-grow px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest flex items-center justify-center gap-4 shadow-2xl transition-all ${
+                  currentVariant?.outOfStock 
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none' 
+                    : 'bg-primary-600 text-white shadow-primary-100 hover:bg-primary-700 active:scale-[0.98]'
+                }`}
               >
-                <ShoppingBag className="w-6 h-6" /> Add to Wellness Bag
+                {currentVariant?.outOfStock ? (
+                  <><XCircle className="w-6 h-6" /> Out of Stock</>
+                ) : (
+                  <><ShoppingBag className="w-6 h-6" /> Add to Wellness Bag</>
+                )}
               </button>
               <button 
                 onClick={() => toggleWishlist(product)}

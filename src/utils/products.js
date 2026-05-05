@@ -12,7 +12,7 @@ import SeaBuckthornMalt from '../assets/Product/organic-seabuckthorn-malt.png';
 import DetoxTeaBox from '../assets/Product/organic-detox-tea-box.png';
 import PCOSGreenJuice from '../assets/Product/organic-green-juice-pcos.png';
 import KidneyDetoxTea from '../assets/Product/organic-kidney-detox-tea.png';
-import MigraineReliefOil from '../assets/Product/organic-migraine-relief-oil.png';
+import MigraineReliefOil from '../assets/Product/organic-migraine-relief-rolon.png';
 import SpineSprayOil from '../assets/Product/organic-spine-spray-oil.png';
 import SlipDiskSpray from '../assets/Product/slip-disk-pain-relief-spray.png';
 import MenStaminaBooster from "../assets/Product/mens-stamina-booster-juice.png";
@@ -69,7 +69,7 @@ export const categoryProducts = {
   'Moringa flour': ['Moringa Atta (Gluten Free Superfood Flour)', 'Moringa Atta gluten-free flour'],
   'Little cheam flour': ['Little Champ Atta – Green Variant'],
   'oil': [
-    'Organic migraine relief oil pack', 
+    'Organic migraine relief rolon', 
     'Organic spine spray oil', 
     'Slip Disk pain relief spray',
     "Kiran's Organic lumber pain oil spray",
@@ -92,7 +92,7 @@ export const allProducts = [
     category: 'Green juice', 
     description: "Natural green juice specifically formulated for PCOS management.",
     variants: [
-      { size: "500gm", price: 799 },
+      { size: "500gm", price: 799, outOfStock: true },
       { size: "1kg", price: 1499 }
     ],
     defaultSize: "1kg"
@@ -129,7 +129,7 @@ export const allProducts = [
   { id: 20, name: "Moringa Atta (Gluten Free Superfood Flour) - 1kg", price: 360, originalPrice: 360, rating: 4.9, reviews: 140, image: MoringaAttaSuperfood, category: 'Moringa flour', description: "Gluten-free superfood flour enriched with Moringa.", variants: [{ size: "1kg", price: 360 }], defaultSize: "1kg" },
   { id: 21, name: "Moringa Atta gluten-free flour (1kg)", price: 360, originalPrice: 360, rating: 4.8, reviews: 90, image: MoringaAtta, category: 'Moringa flour', description: "Healthy Moringa-based herbal flour.", variants: [{ size: "1kg", price: 360 }], defaultSize: "1kg" },
   { id: 23, name: "Little Champ Atta – Green Variant (1kg)", price: 290, originalPrice: 400, rating: 4.9, reviews: 60, image: LittleChampAttaGreen, category: 'Little cheam flour', description: "ABC variant of Little Champ atta for extra nutrition.", variants: [{ size: "1kg", price: 290 }], defaultSize: "1kg" },
-  { id: 28, name: "Organic migraine relief oil pack (100ml)", price: 270, originalPrice: 270, rating: 4.8, reviews: 110, image: MigraineReliefOil, category: 'oil', description: "Soothing oil pack for migraine relief.", variants: [{ size: "100ml", price: 270 }], defaultSize: "100ml" },
+  { id: 28, name: "Organic migraine relief rolon (10ml)", price: 270, originalPrice: 270, rating: 4.8, reviews: 110, image: MigraineReliefOil, category: 'oil', description: "Soothing rolon for migraine relief.", variants: [{ size: "10ml", price: 270 }], defaultSize: "10ml" },
   { id: 29, name: "Organic spine spray oil (100ml)", price: 599, originalPrice: 599, rating: 4.7, reviews: 90, image: SpineSprayOil, category: 'oil', description: "Targeted spray oil for spinal comfort.", variants: [{ size: "100ml", price: 599 }], defaultSize: "100ml" },
   { id: 30, name: "Slip Disk pain relief spray (100ml)", price: 450, originalPrice: 550, rating: 4.9, reviews: 130, image: SlipDiskSpray, category: 'oil', description: "Powerful pain relief spray for slip disk issues.", variants: [{ size: "100ml", price: 450 }], defaultSize: "100ml" },
   { id: 32, name: "Organic Post Pregnancy Spray (100ml)", price: 585, originalPrice: 585, rating: 4.8, reviews: 55, image: PostPregnancySpray, category: 'Pcos pcod care juice', description: "Supportive care spray for post-pregnancy recovery.", variants: [{ size: "100ml", price: 585 }], defaultSize: "100ml" },
@@ -154,7 +154,22 @@ export const allProducts = [
     defaultSize: "1kg"
   },
   { id: 38, name: "Herbal ingredients for joint relief (100ml)", price: 180, originalPrice: 250, rating: 4.7, reviews: 38, image: JointReliefImg, category: 'oil', description: "Natural herbal blend for effective joint pain relief.", variants: [{ size: "100ml", price: 180 }], defaultSize: "100ml" },
-  { id: 39, name: "Organic Green Juice Body Detox", price: 1450, originalPrice: 999, rating: 4.9, reviews: 52, image: BodyDetoxJuiceImg, category: 'Green juice', description: "Refreshing organic green juice for complete body detoxification." },
+  { 
+    id: 39, 
+    name: "Organic Green Juice Body Detox", 
+    price: 1450, 
+    originalPrice: 1999, 
+    rating: 4.9, 
+    reviews: 52, 
+    image: BodyDetoxJuiceImg, 
+    category: 'Green juice', 
+    description: "Refreshing organic green juice for complete body detoxification.",
+    variants: [
+      { size: "500gm", price: 799, outOfStock: true },
+      { size: "1kg", price: 1450 }
+    ],
+    defaultSize: "1kg"
+  },
   { id: 40, name: "Organic Manjista Tea", price: 550, originalPrice: 950, rating: 4.8, reviews: 29, image: ManjistaTeaImg, category: 'Morning permenent tea', description: "Traditional Manjista tea for blood purification and skin health." },
   { id: 41, name: "Orthain Pain Oil (100ml)", price: 180, originalPrice: 200, rating: 4.9, reviews: 42, image: OrthainPainOilImg, category: 'oil', description: "Effective Ayurvedic oil for long-lasting relief from joint and muscular pain.", variants: [{ size: "100ml", price: 180 }], defaultSize: "100ml" }
 ];

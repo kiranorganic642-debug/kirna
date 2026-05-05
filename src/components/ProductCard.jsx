@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, ShoppingBag, Heart } from 'lucide-react';
+import { Star, ShoppingBag, Heart, XCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistProvider';
@@ -18,23 +18,22 @@ const ProductCard = ({ product, viewMode = 'grid' }) => {
     return null;
   });
 
+  // Get current variant based on selected size
+  const currentVariant = product.variants?.find(v => v.size === selectedSize);
+
   // Get current price based on selected size
-  const currentPrice = (() => {
-    if (product.variants && product.variants.length > 0) {
-      const variant = product.variants.find(v => v.size === selectedSize);
-      return variant ? variant.price : product.price;
-    }
-    return product.price;
-  })();
+  const currentPrice = currentVariant ? currentVariant.price : product.price;
 
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart({ 
+    if (currentVariant?.outOfStock) return;
+    const productWithVariant = { 
       ...product, 
-      price: currentPrice, 
+      price: currentPrice,
       selectedSize: selectedSize 
-    });
+    };
+    addToCart(productWithVariant);
   };
 
   const isSelectedSize = (size) => selectedSize === size;
@@ -104,13 +103,16 @@ const ProductCard = ({ product, viewMode = 'grid' }) => {
                     e.stopPropagation();
                     setSelectedSize(v.size);
                   }}
-                  className={`px-4 py-1.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all border ${
+                  className={`px-4 py-1.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all border relative ${
                     isSelectedSize(v.size)
                       ? 'bg-primary-600 border-primary-600 text-white shadow-lg shadow-primary-100'
                       : 'bg-white border-gray-100 text-gray-400 hover:border-primary-200 hover:text-primary-600'
-                  }`}
+                  } ${v.outOfStock ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}
                 >
                   {v.size}
+                  {v.outOfStock && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[6px] px-1 rounded-full">Out</span>
+                  )}
                 </button>
               ))}
             </div>
@@ -127,9 +129,18 @@ const ProductCard = ({ product, viewMode = 'grid' }) => {
           {!product.isComingSoon && (
             <button 
               onClick={handleAddToCart}
-              className="w-14 h-14 bg-primary-600 text-white rounded-2xl hover:bg-primary-700 transition-all duration-300 shadow-xl shadow-primary-50 flex items-center justify-center active:scale-95"
+              disabled={currentVariant?.outOfStock}
+              className={`w-14 h-14 rounded-2xl transition-all duration-300 shadow-xl flex items-center justify-center active:scale-95 ${
+                currentVariant?.outOfStock 
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none' 
+                  : 'bg-primary-600 text-white hover:bg-primary-700 shadow-primary-50'
+              }`}
             >
-              <ShoppingBag className="w-6 h-6" />
+              {currentVariant?.outOfStock ? (
+                <XCircle className="w-6 h-6" />
+              ) : (
+                <ShoppingBag className="w-6 h-6" />
+              )}
             </button>
           )}
         </div>
